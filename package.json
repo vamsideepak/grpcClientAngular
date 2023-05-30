@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "grpc:proto": "grpc_tools_node_protoc.cmd --js_out=import_style=commonjs,binary:. --ts_out=service=grpc-web:. --grpc_out=generate_package_definition:. ./src/app/protos/ScannerClient.proto"
   },
   "private": true,
   "dependencies": {
@@ -18,7 +19,16 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@ngx-grpc/common": "^3.1.1",
+    "@ngx-grpc/core": "^3.1.1",
+    "@ngx-grpc/grpc-web-client": "^3.1.1",
+    "@protobuf-ts/protoc": "^2.9.0",
+    "grpc": "^1.24.11",
+    "grpc_tools_node_protoc_ts": "^5.3.3",
+    "grpc-tools": "^1.12.4",
+    "grpc-web": "^1.4.2",
     "rxjs": "~7.5.0",
+    "ts-protoc-gen": "^0.14.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
@@ -26,6 +36,7 @@
     "@angular-devkit/build-angular": "^14.2.10",
     "@angular/cli": "~14.2.10",
     "@angular/compiler-cli": "^14.2.0",
+    "@types/google-protobuf": "^3.15.6",
     "@types/jasmine": "~4.0.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",

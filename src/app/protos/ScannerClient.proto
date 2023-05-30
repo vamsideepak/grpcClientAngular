@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package ScannerService.V1;
+
+import "google/protobuf/empty.proto";
+
+
+service GrpcPmScannerService {
+  rpc StartScan(StartScanRequest) returns (StartScanResponse);
+  rpc SendScanData(ScanDataRequest) returns (ScanDataResponse);
+  rpc GetScannerHealthCheck(google.protobuf.Empty) returns(ScannerHealthCheck);
+  rpc SendScannerHealthCheckStatus(ScannerHealthCheck) returns(ScannerHealthCheckResponse);
+}
+
+message ScanDataRequest {
+	string PmTransactionID =1; // Session ID
+	string TransactionID =2; // Server TransactionID
+	string RgbFront = 3;
+    string RgbBack = 4;
+	string IrFront = 5;
+	string IrBack = 6;
+	string LstFront = 7;
+	string LstBack = 8;
+	bytes BarcodeBuffer = 9;
+	bytes MagTrack1Buffer = 10;
+	bytes MagTrack2Buffer = 11;
+	bytes MagTrack3Buffer = 12;
+}
+
+message ScanDataResponse {
+	bool acknowledgement = 1;
+	string PmTransactionID =2; // Session ID
+	string TransactionID =3; // Server TransactionID
+	Status ClientStatus =4;
+}
+
+message StartScanRequest{
+	string PmTransactionID =1; // Session ID
+}
+message StartScanResponse{
+	string PmTransactionID =1; // Session ID
+	string TransactionID =2; // Server TransactionID
+	Status ClientStatus =3;
+}
+
+enum Status{
+	Ready =0;
+	Processing=1;
+	Unavailable=2;
+}
+
+message ScannerHealthCheck {
+	int32 statuscode = 1;
+    string statusmessage = 2;
+}
+
+
+message ScannerHealthCheckResponse {
+	bool acknowledgement = 1;
+}

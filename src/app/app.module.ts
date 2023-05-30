@@ -3,16 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { GrpcCoreModule } from '@ngx-grpc/core';
+import { GrpcService } from './services/grpc.service';
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    GrpcCoreModule.forRoot()
   ],
-  providers: [],
+  providers: [GrpcService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
